@@ -1,10 +1,41 @@
-function getShippingMessage(country, price, deliveryFee) {
+function calcAverageCalories(days) {
+    if (days.length === 0) {
+        return 0;
+    }
 
-    const totalPrice = price + deliveryFee;
-    const message = `Shipping to ${country} will cost ${totalPrice} credits`;
-    return message;
+    let totalCalories = 0;
+    for (const day of days) {
+        totalCalories += day.calories;
+    }
+
+    return totalCalories / days.length;
 }
 
-console.log(getShippingMessage("USA", 1000, 50)); // "Shipping to USA will cost 1050 credits"
-console.log(getShippingMessage("Canada", 500, 30)); // "Shipping to Canada will cost 530 credits"
-console.log(getShippingMessage("UK", 1500, 70)); // "Shipping to UK will cost 1570 credits"
+// Перевірка роботи функції
+console.log(
+    calcAverageCalories([
+        { day: "monday", calories: 3010 },
+        { day: "tuesday", calories: 3200 },
+        { day: "wednesday", calories: 3120 },
+        { day: "thursday", calories: 2900 },
+        { day: "friday", calories: 3450 },
+        { day: "saturday", calories: 3280 },
+        { day: "sunday", calories: 3300 }
+    ])
+); // 3180
+
+console.log(
+    calcAverageCalories([
+        { day: "monday", calories: 2040 },
+        { day: "tuesday", calories: 2270 },
+        { day: "wednesday", calories: 2420 },
+        { day: "thursday", calories: 1900 },
+        { day: "friday", calories: 2370 },
+        { day: "saturday", calories: 2280 },
+        { day: "sunday", calories: 2610 }
+    ])
+); // 2270
+
+console.log(
+    calcAverageCalories([])
+); // 0
